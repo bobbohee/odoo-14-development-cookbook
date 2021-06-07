@@ -1,0 +1,82 @@
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+        <record id="my_library.view_form" model="ir.ui.view"> <!-- id="library_book_view_form" -->
+            <field name="name">Library Book Form</field>
+            <field name="model">library.book</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="author_ids" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="date_release"/>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="my_library.view_tree" model="ir.ui.view"> <!-- id="library_book_view_tree" -->
+            <field name="name">Library Book List</field>
+            <field name="model">library.book</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="date_release"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="my_library.view_search" model="ir.ui.view">
+            <field name="name">Library Book Search</field>
+            <field name="model">library.book</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="author_ids"/>
+                    <filter string="No Authors"
+                            name="without_author"
+                            domain="[('author_ids', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+        <record id="my_library.act_window" model="ir.actions.act_window"> <!-- id="library_book_action" -->
+            <field name="name">Library Books</field>
+            <field name="res_model">library.book</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- server action to the one above -->
+        <!--
+            <record model="ir.actions.server" id="my_library.action_server">
+              <field name="name">my_library server</field>
+              <field name="model_id" ref="model_my_library_my_library"/>
+              <field name="state">code</field>
+              <field name="code">
+                action = {
+                  "type": "ir.actions.act_window",
+                  "view_mode": "tree,form",
+                  "res_model": model._name,
+                }
+              </field>
+            </record>
+        -->
+
+        <!-- Top menu item -->
+        <menuitem name="My Library" id="my_library.menu_root"/> <!-- id="library_base_menu" -->
+        <!-- menu categories -->
+        <menuitem name="Books" id="my_library.menu_book" parent="my_library.menu_root" action="my_library.act_window"/>  <!-- id="library_book_menu" -->
+        <!-- actions -->
+        <!--
+            <menuitem name="List" id="my_library.menu_1_list" parent="my_library.menu_1"
+                      action="my_library.action_window"/>
+            <menuitem name="Server to list" id="my_library" parent="my_library.menu_2"
+                      action="my_library.action_server"/>
+        -->
+    </data>
+</odoo>
