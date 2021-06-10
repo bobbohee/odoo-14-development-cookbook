@@ -1,0 +1,11 @@
+<odoo>
+    <data>
+        <!-- Top menu item -->
+        <menuitem name="My Library" id="my_library.menu_root"/> <!-- id="library_base_menu" -->
+        <!-- menu categories -->
+        <menuitem name="Book" id="my_library.menu_book" parent="my_library.menu_root"/>
+        <!-- actions -->
+        <menuitem name="Book" id="my_library.menu_book_book" parent="my_library.menu_book" action="my_library.act_window_book"/>
+        <menuitem name="Category" id="my_library.menu_book_category" parent="my_library.menu_book" action="my_library.act_window_book_category"/>
+    </data>
+</odoo>

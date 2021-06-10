@@ -24,3 +24,15 @@ class LibraryBookCategory(models.Model):
     def _check_hierarchy(self):
         if not self._check_recursion():
             raise models.ValidationError('Error! You cannot create recursive categories.')
+
+    def create_categories(self):
+        categ1 = {'name': 'Child category 1'}
+        categ2 = {'name': 'Child category 2'}
+        parent_category_val = {
+            'name': 'Parent Category',
+            'child_ids': [
+                (0, 0, categ1),
+                (0, 0, categ2),
+            ]
+        }
+        record = self.env['library.book.category'].create(parent_category_val)

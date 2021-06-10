@@ -4,6 +4,7 @@ from odoo import models, fields, api
 
 
 class ResPartner(models.Model):
+    # 클래스 상속 (확장)
     _inherit = 'res.partner'
     _order = 'name'
 
@@ -16,5 +17,5 @@ class ResPartner(models.Model):
 
     @api.depends('authored_book_ids')
     def _compute_count_books(self):
-        for r in self:
-            r.count_books = len(r.authored_book_ids)
+        for record in self:
+            record.count_books = len(record.authored_book_ids)
