@@ -200,12 +200,12 @@ class LibraryBook(models.Model):
                 raise UserError('You are not allowed to modify manage_remarks')
         return super(LibraryBook, self).create(values)
 
-    # @api.model
-    # def write(self, values):
-    #     if not self.user_has_groups('my_library.acl_book_librarian'):
-    #         if 'manage_remarks' in values:
-    #             raise UserError('You are not allowed to modify manage_remarks')
-    #     return super(LibraryBook, self).write(values)
+    # @api.model -> TypeError: write() takes 2 positional arguments but 3 were given (?)
+    def write(self, values):
+        if not self.user_has_groups('my_library.acl_book_librarian'):
+            if 'manage_remarks' in values:
+                raise UserError('You are not allowed to modify manage_remarks')
+        return super(LibraryBook, self).write(values)
 
     @api.model
     def _name_search(self, name='', args=None, operator='ilike', limit=100, name_get_uid=None):
