@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+    <record id="book_cookbook" model="library.book">
+        <field name="name">Odoo 14 Development Cookbook</field>
+    </record>
+
+    <record id="book_category_all" model="library.book.category" forcecreate="false">
+        <field name="name">All books</field>
+    </record>
+
+    <record id="res_partner_packet" model="res.company">
+        <field name="name">Packt Publishing</field>
+        <field name="city">Birmingham</field>
+        <field name="country_id" ref="base.uk"/>
+    </record>
+
+    <function model="library.book" name="update_book_price"/>
+
+<!--    레코드 삭제 : * 위험하기 떄문에 거의 사용하지 않음 -->
+<!--    <delete id="book_category_all" model="library.book.category"/>-->
+<!--    <delete search="[('name', 'ilike', 'All books')]" model="library.book.category"/>-->
+</odoo>

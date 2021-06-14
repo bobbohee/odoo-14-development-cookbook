@@ -11,7 +11,7 @@ class LibraryMember(models.Model):
     _inherits = {'res.partner': 'partner_id'}
     _description = 'Library Member'
 
-    partner_id = fields.Many2one('res.partner', ondelete='cascade')
+    partner_id = fields.Many2one('res.partner', required=True, ondelete='cascade')
     # inherits 대신 delegate 사용 시, 동일하게 동작 -> delegate=True
     date_start = fields.Date('Member Since')
     date_end = fields.Date('Termination Date')

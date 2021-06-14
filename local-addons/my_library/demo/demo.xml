@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="author_1" model="res.partner">
+            <field name="name">공여사</field>
+        </record>
+        <record id="author_2" model="res.partner">
+            <field name="name">최원영</field>
+        </record>
+        <record id="author_3" model="res.partner">
+            <field name="name">이와무라 카즈오</field>
+        </record>
+        <record id="author_4" model="res.partner">
+            <field name="name">김종민</field>
+        </record>
+
+        <record id="book_cookbook" model="library.book">
+            <field name="name">Odoo Cookbook</field>
+            <field name="short_name">cookbook</field>
+            <field name="date_release">2016-03-01</field>
+            <field name="author_ids"
+                   eval="[(6, 0, [ref('author_1'), ref('author_2'), ref('author_4')])]"/>
+            <field name="publisher_id" ref="res_partner_packet"/>
+        </record>
+    </data>
+</odoo>

@@ -4,7 +4,7 @@
     'summary': """Manage books easily""",
     'author': "bobbohee",
     'category': 'Library',
-    'version': '0.1',
+    'version': '13.0.1.0.1',
     'depends': ['base'],
     'data': [
         'security/groups.xml',
@@ -12,6 +12,10 @@
         'views/library_book_views.xml',
         'views/library_book_category_views.xml',
         'views/library_book_menus.xml',
+        'data/data.xml',
+    ],
+    'demo': [
+        'demo/demo.xml',
     ],
     # 'auto_install': True
     # 'installable': True,
