@@ -4,7 +4,11 @@ from odoo import models, fields, api
 from odoo.exceptions import UserError
 from odoo.tools.translate import _
 
+import logging
 from datetime import timedelta
+
+logger = logging.getLogger(__name__)
+
 
 # 파이썬 예외 졸류
 
@@ -144,7 +148,10 @@ class LibraryBook(models.Model):
         self.change_state('borrowed')
 
     def make_lost(self):
+        self.ensure_one()
         self.change_state('lost')
+        if not self.env.context.get('avoid_deactivate'):
+            self.active = False
 
     def log_all_library_members(self):
         # This is an empty recordset of model library.member
@@ -231,3 +238,31 @@ class LibraryBook(models.Model):
         all_books = self.search([])
         for book in all_books:
             book.cost_price += 10
+
+    def book_rent(self):
+        self.ensure_one()
+        if self.state != 'available':
+            raise UserError(_('Book is not available for renting'))
+        rent_as_superuser = self.env['library.book.rent'].sudo()
+        rent_as_superuser.create({
+            'book_id': self.id,
+            'borrower_id': self.env.user.partner_id.id,
+        })
+
+    def average_book_occupation(self):
+        self.flush()
+        sql_query = """
+            SELECT
+                lb.name,
+                avg((EXTRACT(epoch from age(return_date, rent_date)) / 86400))::int
+            FROM
+                library_book_rent AS lbr
+            JOIN 
+                library_book as lb On lb.id = lbr.book_id
+            WHERE
+                lbr.state = 'returned'
+            GROUP BY lb.name;
+        """
+        self.env.cr.execute(sql_query)
+        result = self.env.cr.fetchall()
+        logger.info('Average book occupation: %s', result)

@@ -1,11 +1,13 @@
 <odoo>
     <data>
         <!-- Top menu item -->
-        <menuitem name="My Library" id="my_library.menu_root"/> <!-- id="library_base_menu" -->
+        <menuitem name="My Library" id="menu_root"/> <!-- id="library_base_menu" -->
         <!-- menu categories -->
-        <menuitem name="Book" id="my_library.menu_book" parent="my_library.menu_root"/>
+        <menuitem name="Book" id="menu_book" parent="menu_root"/>
+        <menuitem name="Settings" id="menu_book_setting" parent="menu_root" action="act_window_book_setting" sequence="50"/>
         <!-- actions -->
-        <menuitem name="Book" id="my_library.menu_book_book" parent="my_library.menu_book" action="my_library.act_window_book"/>
-        <menuitem name="Category" id="my_library.menu_book_category" parent="my_library.menu_book" action="my_library.act_window_book_category"/>
+        <menuitem name="Book" id="menu_book_book" parent="menu_book" action="act_window_book"/>
+        <menuitem name="Category" id="menu_book_category" parent="menu_book" action="act_window_book_category"/>
+        <menuitem name="Rent" id="menu_book_rent" parent="menu_book" action="act_window_book_rent"/>
     </data>
 </odoo>

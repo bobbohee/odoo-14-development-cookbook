@@ -7,6 +7,9 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
+                        <button name="average_book_occupation" string="Log Average Occ." type="object"/>
+                        <button name="book_rent" string="Rent this book" type="object" class="btn-primary" groups="my_library.group_self_borrow"/>
+<!--                        <button name="book_rent" string="Rent Book" type="object"/>-->
                         <button name="find_book" string="Find Book" type="object"/>
                         <button name="change_release_date" string="Update Date" type="object"/>
                         <button name="log_all_library_members" string="Log Members" type="object"/>
